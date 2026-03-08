@@ -48,7 +48,7 @@ CREATE TABLE t_note(
     id_candidat INTEGER NOT NULL,
     id_matiere INTEGER NOT NULL,
     id_correcteur INTEGER NOT NULL,
-    note FLOAT NOT NULL,
+    note DECIMAL(10,3) NOT NULL,
     FOREIGN KEY (id_candidat) REFERENCES t_candidat(id),
     FOREIGN KEY (id_matiere) REFERENCES t_matiere(id),
     FOREIGN KEY (id_correcteur) REFERENCES t_correcteur(id)
