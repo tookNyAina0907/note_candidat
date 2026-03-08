@@ -37,13 +37,10 @@ INSERT INTO t_operateur (id, operateur) VALUES
 INSERT INTO t_parametre (id,id_matiere,id_resolution,id_operateur,seuil) VALUES
 (1,1,1,1,8),
 (2,1,2,2,7),
-(3,1,3,3,2),
-(4,2,1,1,6),
-(5,2,2,2,3),
-(6,2,3,3,4),
-(7,3,1,1,12),
-(8,3,2,2,10),
-(9,3,3,3,16);
+(3,2,1,1,6),
+(4,2,2,2,3),
+(5,3,1,1,12),
+(6,3,2,2,10);
 
 
 INSERT INTO t_note (id_candidat,id_matiere,id_correcteur,note) VALUES
