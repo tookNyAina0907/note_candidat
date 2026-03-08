@@ -29,7 +29,7 @@ CREATE TABLE t_resolution(
 
 CREATE TABLE t_operateur(
     id SERIAL PRIMARY KEY,
-    operateur VARCHAR(1) NOT NULL
+    operateur VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE t_parametre(
