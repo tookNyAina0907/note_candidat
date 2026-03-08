@@ -26,7 +26,8 @@ INSERT INTO t_resolution (nom) VALUES
 
 INSERT INTO t_operateur (operateur) VALUES
 ('<'),
-('>');
+('>'),
+('=');
 
 INSERT INTO t_parametre (id_matiere, id_resolution, id_operateur, seuil) VALUES
 (1, 1, 1, 10.0),
