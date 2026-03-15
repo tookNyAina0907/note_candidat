@@ -1,46 +1,46 @@
 
 
-INSERT INTO t_candidat (id, nom, prenom, matricule) VALUES
-(1,'Rakoto','Jean','MAT001'),
-(2,'Rabe','Marie','MAT002'),
-(3,'Andrianina','Paul','MAT003');
+INSERT INTO t_candidat ( nom, prenom, matricule) VALUES
+('Rakoto','Jean','MAT001'),
+('Rabe','Marie','MAT002'),
+('Andrianina','Paul','MAT003');
 
 
-INSERT INTO t_correcteur (id, nom, prenom, numtel) VALUES
-(1,'Rasoa','Andry','341234567'),
-(2,'Rasoanaivo','Hery','342345678'),
-(3,'Rajaonarison','Lala','343456789'),
-(4,'Rakotondrazaka','Mamy','344567890'),
-(5,'Ratsimbazafy','Fidy','345678901'),
-(6,'Rakotomalala','Sofia','345664901');
+INSERT INTO t_correcteur ( nom, prenom, numtel) VALUES
+('Rasoa','Andry','341234567'),
+('Rasoanaivo','Hery','342345678'),
+('Rajaonarison','Lala','343456789'),
+('Rakotondrazaka','Mamy','344567890'),
+('Ratsimbazafy','Fidy','345678901'),
+('Rakotomalala','Sofia','345664901');
 
 
-INSERT INTO t_matiere (id, nom, coefficient) VALUES
-(1,'Mathematiques',4),
-(2,'Physique',3),
-(3,'Chimie',2);
+INSERT INTO t_matiere (nom, coefficient) VALUES
+('Mathematiques',4),
+('Physique',3),
+('Chimie',2);
 
 
-INSERT INTO t_resolution (id, nom) VALUES
-(1,'plus petit'),
-(2,'plus grand'),
-(3,'moyenne');
+INSERT INTO t_resolution (nom) VALUES
+('plus petit'),
+('plus grand'),
+('moyenne');
 
 
-INSERT INTO t_operateur (id, operateur) VALUES
-(1,'<'),
-(2,'>'),
-(3,'=');
+INSERT INTO t_operateur (operateur) VALUES
+('<'),
+('>'),
+('=');
 
 
 
-INSERT INTO t_parametre (id,id_matiere,id_resolution,id_operateur,seuil) VALUES
-(1,1,1,1,8),
-(2,1,2,2,7),
-(3,2,1,1,6),
-(4,2,2,2,3),
-(5,3,1,1,12),
-(6,3,2,2,10);
+INSERT INTO t_parametre (id_matiere,id_resolution,id_operateur,seuil) VALUES
+(1,1,1,8),
+(1,2,2,7),
+(2,1,1,6),
+(2,2,2,3),
+(3,1,1,12),
+(3,2,2,10);
 
 
 INSERT INTO t_note (id_candidat,id_matiere,id_correcteur,note) VALUES

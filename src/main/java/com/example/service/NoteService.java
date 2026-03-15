@@ -93,19 +93,7 @@ public class NoteService {
         List<Parametre> parametres = parametreService.getParametresByMatiere(matiereId);
         Parametre bonParametre = parametreService.getBonParametre(diff, parametres);
         if (bonParametre.getId() != null) {
-            switch (bonParametre.getOperateur().getOperateur()) {
-                case "<":
-                    noteFinal = getBonMethodeCalcul(bonParametre, notes);
-                    break;
-
-                case ">":
-                    noteFinal = getBonMethodeCalcul(bonParametre, notes);
-                    break;
-
-                case "=":
-                    noteFinal = getBonMethodeCalcul(bonParametre, notes);
-                    break;
-            }
+            noteFinal = getBonMethodeCalcul(bonParametre, notes);
         }
         return noteFinal;
     }

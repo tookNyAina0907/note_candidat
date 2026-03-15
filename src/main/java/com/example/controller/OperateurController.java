@@ -30,8 +30,17 @@ public class OperateurController {
     }
 
     @PostMapping("/save")
-    public String saveOperateur(@ModelAttribute("operateur") Operateur operateur) {
-        operateurService.saveOperateur(operateur);
+    public String saveOperateur(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam("operateur") String operateur) {
+        if (id!=null) {
+            Operateur operateur1 = operateurService.getOperateurById(id);
+            operateur1.setOperateur(operateur);
+            operateurService.saveOperateur(operateur1);
+            // operateurService.upateOperateur(new Operateur(id, operateur));
+        }else{
+            operateurService.saveOperateur(new Operateur(operateur));
+        }
         return "redirect:/operateurs";
     }
 
