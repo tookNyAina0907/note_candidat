@@ -9,6 +9,7 @@ import com.example.model.Parametre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,17 +101,19 @@ public class NoteService {
 
     public double getBonMethodeCalcul(Parametre parametre, List<Note> notes) {
         double noteFinal = 0.0;
-        switch (parametre.getResolution().getId()) {
-            case 1:
-                noteFinal = getMinNote(notes);
-                break;
-            case 2:
-                noteFinal = getMaxNote(notes);
-                break;
-            case 3:
-                noteFinal = getMoyenneNote(notes);
-                break;
+
+        try {
+            String nomResolution = parametre.getResolution().getNom();
+            String methodName = "get" + nomResolution.substring(0, 1).toUpperCase()
+                    + nomResolution.substring(1) + "Note";
+
+            Method method = this.getClass().getMethod(methodName, List.class);
+            noteFinal = (double) method.invoke(this, notes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return noteFinal;
     }
 }
