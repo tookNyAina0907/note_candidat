@@ -90,11 +90,13 @@ public class NoteService {
     public double CalculNoteFinal(Candidat candidatId, Matiere matiereId) {
         List<Note> notes = getNotesByCandidatAndMatiere(candidatId, matiereId);
         double noteFinal = 0.0;
-        double diff = SommeDiff(candidatId, matiereId);
-        List<Parametre> parametres = parametreService.getParametresByMatiere(matiereId);
-        Parametre bonParametre = parametreService.getBonParametre(diff, parametres);
-        if (bonParametre.getId() != null) {
-            noteFinal = getBonMethodeCalcul(bonParametre, notes);
+        if (!notes.isEmpty()) {
+            double diff = SommeDiff(candidatId, matiereId);
+            List<Parametre> parametres = parametreService.getParametresByMatiere(matiereId);
+            Parametre bonParametre = parametreService.getBonParametre(diff, parametres);
+            if (bonParametre.getId() != null) {
+                noteFinal = getBonMethodeCalcul(bonParametre, notes);
+            }
         }
         return noteFinal;
     }
