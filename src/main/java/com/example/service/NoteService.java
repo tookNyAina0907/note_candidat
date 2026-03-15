@@ -56,7 +56,7 @@ public class NoteService {
         return sommeDiff;
     }
 
-    public double CalculeMoyenne(List<Note> notes) {
+    public double getMoyenneNote(List<Note> notes) {
         double calculeMoyenne = 0.0;
         double coefficientTotal = 0.0;
         for (Note note : notes) {
@@ -108,7 +108,7 @@ public class NoteService {
                 noteFinal = getMaxNote(notes);
                 break;
             case 3:
-                noteFinal = CalculeMoyenne(notes);
+                noteFinal = getMoyenneNote(notes);
                 break;
         }
         return noteFinal;
