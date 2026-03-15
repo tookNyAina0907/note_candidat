@@ -7,3 +7,4 @@ todo.todo
 .settings
 mvnw
 mvnw.cmd
+src/main/resources/application.properties
