@@ -29,7 +29,7 @@ public class NoteController {
 
     @Autowired
     private MatiereService matiereService;
-    
+
     @Autowired
     private CorrecteurService correcteurService;
 
@@ -39,10 +39,11 @@ public class NoteController {
         // Group notes by Candidat and Matiere for a cleaner list view
         Map<String, List<Note>> groupedNotes = new LinkedHashMap<>();
         for (Note n : allNotes) {
-            String key = n.getCandidat().getMatricule() + " - " + n.getCandidat().getNom() + " | " + n.getMatiere().getNom();
+            String key = n.getCandidat().getMatricule() + " - " + n.getCandidat().getNom() + " | "
+                    + n.getMatiere().getNom();
             groupedNotes.computeIfAbsent(key, k -> new ArrayList<>()).add(n);
         }
-        
+
         model.addAttribute("groupedNotes", groupedNotes);
         return "note/list";
     }
@@ -107,7 +108,7 @@ public class NoteController {
         noteService.deleteNoteById(id);
         return "redirect:/notes";
     }
-    
+
     private void populateDropdowns(Model model) {
         model.addAttribute("candidats", candidatService.getAllCandidats());
         model.addAttribute("matieres", matiereService.getAllMatieres());
@@ -116,7 +117,8 @@ public class NoteController {
 
     @GetMapping("/final")
     public String showFinalNoteForm(Model model) {
-        // Here we just reuse populateDropdowns to pass matieres and candidats, ignoring correcteurs.
+        // Here we just reuse populateDropdowns to pass matieres and candidats, ignoring
+        // correcteurs.
         populateDropdowns(model);
         return "note/Notefinal";
     }

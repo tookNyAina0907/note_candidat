@@ -9,6 +9,7 @@ import com.example.model.Parametre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class NoteService {
         return sommeDiff;
     }
 
-    public double CalculeMoyenne(List<Note> notes) {
+    public double getMoyenneNote(List<Note> notes) {
         double calculeMoyenne = 0.0;
         double coefficientTotal = 0.0;
         for (Note note : notes) {
@@ -89,22 +90,12 @@ public class NoteService {
     public double CalculNoteFinal(Candidat candidatId, Matiere matiereId) {
         List<Note> notes = getNotesByCandidatAndMatiere(candidatId, matiereId);
         double noteFinal = 0.0;
-        double diff = SommeDiff(candidatId, matiereId);
-        List<Parametre> parametres = parametreService.getParametresByMatiere(matiereId);
-        Parametre bonParametre = parametreService.getBonParametre(diff, parametres);
-        if (bonParametre.getId() != null) {
-            switch (bonParametre.getOperateur().getOperateur()) {
-                case "<":
-                    noteFinal = getBonMethodeCalcul(bonParametre, notes);
-                    break;
-
-                case ">":
-                    noteFinal = getBonMethodeCalcul(bonParametre, notes);
-                    break;
-
-                case "=":
-                    noteFinal = getBonMethodeCalcul(bonParametre, notes);
-                    break;
+        if (!notes.isEmpty()) {
+            double diff = SommeDiff(candidatId, matiereId);
+            List<Parametre> parametres = parametreService.getParametresByMatiere(matiereId);
+            Parametre bonParametre = parametreService.getBonParametre(diff, parametres);
+            if (bonParametre.getId() != null) {
+                noteFinal = getBonMethodeCalcul(bonParametre, notes);
             }
         }
         return noteFinal;
@@ -112,17 +103,19 @@ public class NoteService {
 
     public double getBonMethodeCalcul(Parametre parametre, List<Note> notes) {
         double noteFinal = 0.0;
-        switch (parametre.getResolution().getId()) {
-            case 1:
-                noteFinal = getMinNote(notes);
-                break;
-            case 2:
-                noteFinal = getMaxNote(notes);
-                break;
-            case 3:
-                noteFinal = CalculeMoyenne(notes);
-                break;
+
+        try {
+            String nomResolution = parametre.getResolution().getNom();
+            String methodName = "get" + nomResolution.substring(0, 1).toUpperCase()
+                    + nomResolution.substring(1) + "Note";
+
+            Method method = this.getClass().getMethod(methodName, List.class);
+            noteFinal = (double) method.invoke(this, notes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return noteFinal;
     }
 }
