@@ -1,6 +1,7 @@
 INSERT INTO t_candidat ( nom, prenom, matricule) VALUES
 ('Candidat1','Jean','MAT001'),
-('Candidat2','Marie','MAT002');
+('Candidat2','Marie','MAT002'),
+('Candidat3','Rakoto','MAT003');
 
 
 INSERT INTO t_correcteur ( nom, prenom, numtel) VALUES
@@ -10,13 +11,13 @@ INSERT INTO t_correcteur ( nom, prenom, numtel) VALUES
 
 
 INSERT INTO t_matiere (nom, coefficient) VALUES
-('JAVA',1),
+('Python',1),
 ('PHP',1);
 
 
 INSERT INTO t_resolution (nom) VALUES
-('plus petit'),
-('plus grand'),
+('min'),
+('max'),
 ('moyenne');
 
 

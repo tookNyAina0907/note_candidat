@@ -1,11 +1,12 @@
-package com.example.controller;
+package com.example.forage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
 @Controller
-public class HomeController {
-    @GetMapping("/")
+public class ForageHomeController {
+    @GetMapping("/forage")
     public String home() {
-        return "home";
+        return "forage/home";
     }
 }
