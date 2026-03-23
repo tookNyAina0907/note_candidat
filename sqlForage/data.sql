@@ -8,3 +8,9 @@ INSERT INTO t_demande (client_id, description, district) VALUES
 (2, 'Demande de devis pour un forage agricole', 'District B'),
 (3, 'Recherche de solutions de forage pour un projet industriel', 'District C');
 
+INSERT INTO t_statut(nom) VALUES
+('demande cree'),
+('devis etude acceptee'),
+('devis etude refuse'),
+('devis forage acceptee'),
+('devis forage refuse');

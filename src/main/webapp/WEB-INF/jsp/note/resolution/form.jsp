@@ -19,7 +19,7 @@
                         <%= title %>
                     </h2>
 
-                    <form action="<%= request.getContextPath() %>/resolutions/save" method="post" class="mt-4">
+                    <form action="<%= request.getContextPath() %>/note/resolutions/save" method="post" class="mt-4">
                         <% if (resolution !=null && resolution.getId() !=null) { %>
                             <input type="hidden" name="id" value="<%= resolution.getId() %>" />
                             <% } %>
@@ -32,7 +32,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-success">Enregistrer</button>
-                                <a href="<%= request.getContextPath() %>/resolutions"
+                                <a href="<%= request.getContextPath() %>/note/resolutions"
                                     class="btn btn-secondary">Annuler</a>
                     </form>
                 </div>

@@ -30,10 +30,10 @@
             <p class="text-muted mb-0">Notes finales de tous les candidats par matière</p>
         </div>
         <div>
-            <a href="<%= request.getContextPath() %>/notes/final" class="btn btn-outline-primary me-2">
+            <a href="<%= request.getContextPath() %>/note/notes/final" class="btn btn-outline-primary me-2">
                 Calculer une note
             </a>
-            <a href="<%= request.getContextPath() %>/" class="btn btn-secondary">
+            <a href="<%= request.getContextPath() %>/note" class="btn btn-secondary">
                 Retour à l'accueil
             </a>
         </div>

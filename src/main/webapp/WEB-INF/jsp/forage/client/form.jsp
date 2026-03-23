@@ -6,9 +6,9 @@
     <main>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
             <h2>${client.id != null ? 'Modifier le Client' : 'Ajouter un Client'}</h2>
-            <a href="${pageContext.request.contextPath}/client" class="btn btn-secondary">Retour à la liste</a>
+            <a href="${pageContext.request.contextPath}/forage/client" class="btn btn-secondary">Retour à la liste</a>
         </div>
-        <form action="${pageContext.request.contextPath}/client/add" method="post" class="modern-form">
+        <form action="${pageContext.request.contextPath}/forage/client/add" method="post" class="modern-form">
             <input type="hidden" name="id" value="${client.id}" />
             
             <div class="form-group">

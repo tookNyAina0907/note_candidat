@@ -17,7 +17,7 @@
                         <div class="container mt-5">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h2>Liste des Paramètres</h2>
-                                <a href="<%= request.getContextPath() %>/parametres/new" class="btn btn-primary">Ajouter
+                                <a href="<%= request.getContextPath() %>/note/parametres/new" class="btn btn-primary">Ajouter
                                     un Paramètre</a>
                             </div>
 
@@ -51,9 +51,9 @@
                                                 <%= p.getSeuil() %>
                                             </td>
                                             <td>
-                                                <a href="<%= request.getContextPath() %>/parametres/edit/<%= p.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/note/parametres/edit/<%= p.getId() %>"
                                                     class="btn btn-sm btn-warning">Éditer</a>
-                                                <a href="<%= request.getContextPath() %>/parametres/delete/<%= p.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/note/parametres/delete/<%= p.getId() %>"
                                                     class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce paramètre ?');">Supprimer</a>
                                             </td>
@@ -61,7 +61,7 @@
                                         <% } } %>
                                 </tbody>
                             </table>
-                            <a href="<%= request.getContextPath() %>/" class="btn btn-secondary">Retour à l'accueil</a>
+                            <a href="<%= request.getContextPath() %>/note" class="btn btn-secondary">Retour à l'accueil</a>
                         </div>
                     </body>
 

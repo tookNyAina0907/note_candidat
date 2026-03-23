@@ -5,8 +5,8 @@
     --primary-light: #1e293b;
     --secondary: #10b981; /* Emerald for Forage/Growth */
     --accent: #f59e0b;    /* Gold/Amber for Notes/Value */
-    --background: #f8fafc;
-    --surface: rgba(255, 255, 255, 0.8);
+    --background: #144b81;
+    --surface: rgba(29, 59, 141, 0.8);
     --text-main: #1e293b;
     --text-muted: #64748b;
     --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

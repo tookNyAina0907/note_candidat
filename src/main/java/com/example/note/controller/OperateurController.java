@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/operateurs")
+@RequestMapping("/note/operateurs")
 public class OperateurController {
 
     @Autowired
@@ -41,14 +41,14 @@ public class OperateurController {
         }else{
             operateurService.saveOperateur(new Operateur(operateur));
         }
-        return "redirect:/operateurs";
+        return "redirect:/note/operateurs";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
         Operateur operateur = operateurService.getOperateurById(id);
         if (operateur == null) {
-            return "redirect:/operateurs";
+            return "redirect:/note/operateurs";
         }
         model.addAttribute("operateur", operateur);
         return "note/operateur/form";
@@ -57,6 +57,6 @@ public class OperateurController {
     @GetMapping("/delete/{id}")
     public String deleteOperateur(@PathVariable("id") Integer id) {
         operateurService.deleteOperateurById(id);
-        return "redirect:/operateurs";
+        return "redirect:/note/operateurs";
     }
 }

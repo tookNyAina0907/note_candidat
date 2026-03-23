@@ -10,7 +10,7 @@ import com.example.forage.model.Client;
 import com.example.forage.service.ClientService;
 
 @Controller
-@RequestMapping("/client")
+@RequestMapping("/forage/client")
 public class ClientController {
     @Autowired
     private ClientService clientService;
@@ -35,7 +35,7 @@ public class ClientController {
         } else {
             clientService.saveClient(client);
         }
-        return "redirect:/client";
+        return "redirect:/forage/client";
     }
 
     @GetMapping("/edit/{id}")
@@ -48,7 +48,7 @@ public class ClientController {
     @GetMapping("/delete/{id}")
     public String deleteClient(@PathVariable("id") Long id) {
         clientService.deleteClient(id);
-        return "redirect:/client";
+        return "redirect:/forage/client";
     }
 
 }

@@ -19,7 +19,7 @@
                         <%= title %>
                     </h2>
 
-                    <form action="<%= request.getContextPath() %>/matieres/save" method="post" class="mt-4">
+                    <form action="<%= request.getContextPath() %>/note/matieres/save" method="post" class="mt-4">
                         <% if (matiere !=null && matiere.getId() !=null) { %>
                             <input type="hidden" name="id" value="<%= matiere.getId() %>" />
                             <% } %>
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-success">Enregistrer</button>
-                                <a href="<%= request.getContextPath() %>/matieres" class="btn btn-secondary">Annuler</a>
+                                <a href="<%= request.getContextPath() %>/note/matieres" class="btn btn-secondary">Annuler</a>
                     </form>
                 </div>
             </body>

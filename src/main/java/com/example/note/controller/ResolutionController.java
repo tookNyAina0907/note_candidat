@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/resolutions")
+@RequestMapping("/note/resolutions")
 public class ResolutionController {
 
     @Autowired
@@ -32,14 +32,14 @@ public class ResolutionController {
     @PostMapping("/save")
     public String saveResolution(@ModelAttribute("resolution") Resolution resolution) {
         resolutionService.saveResolution(resolution);
-        return "redirect:/resolutions";
+        return "redirect:/note/resolutions";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
         Resolution resolution = resolutionService.getResolutionById(id);
         if (resolution == null) {
-            return "redirect:/resolutions";
+            return "redirect:/note/resolutions";
         }
         model.addAttribute("resolution", resolution);
         return "note/resolution/form";
@@ -48,6 +48,6 @@ public class ResolutionController {
     @GetMapping("/delete/{id}")
     public String deleteResolution(@PathVariable("id") Integer id) {
         resolutionService.deleteResolutionById(id);
-        return "redirect:/resolutions";
+        return "redirect:/note/resolutions";
     }
 }

@@ -17,8 +17,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/client">Clients</a></li>
-                <li><a href="${pageContext.request.contextPath}/demande">Demandes</a></li>
+                <li><a href="${pageContext.request.contextPath}/forage/client">Clients</a></li>
+                <li><a href="${pageContext.request.contextPath}/forage/demande">Demandes</a></li>
             </ul>
         </nav>
     </header>

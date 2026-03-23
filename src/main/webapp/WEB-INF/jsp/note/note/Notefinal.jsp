@@ -33,7 +33,7 @@
                                                 <div class="card shadow-sm mb-4">
                                                     <div class="card-body">
                                                         <form
-                                                            action="<%= request.getContextPath() %>/notes/final/compute"
+                                                            action="<%= request.getContextPath() %>/note/notes/final/compute"
                                                             method="post">
                                                             <div class="row g-3">
                                                                 <div class="col-md-5">
@@ -93,7 +93,7 @@
                                                     <% } %>
 
                                                         <div class="mt-4">
-                                                            <a href="<%= request.getContextPath() %>/"
+                                                            <a href="<%= request.getContextPath() %>/note"
                                                                 class="btn btn-secondary">Retour à l'accueil</a>
                                                         </div>
                                     </div>
