@@ -1,103 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Note & Forage</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home-modern.css">
+</head>
+<body>
+    <div class="main-container">
+        <header class="welcome-header">
+            <p>Plateforme de Gestion</p>
+            <h1>Bienvenue</h1>
+        </header>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Accueil - Note Candidat</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/style.css" rel="stylesheet">
-    </head>
+        <main class="grid-options">
+            <a href="${pageContext.request.contextPath}/forage" class="card card-forage">
+                <div class="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <h2>Forage</h2>
+                <p>Gestion des clients et demandes de forage</p>
+                <div class="card-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
 
-    <body>
-        <div class="container mt-5 text-center">
-            <h1 class="mb-4">Bienvenue dans le Système de Gestion des Notes</h1>
-            <p class="lead mb-5">Choisissez une option ci-dessous pour gérer les différentes entités du système.</p>
-
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Candidats</h5>
-                            <p class="card-text">Gérer la liste des candidats inscrits aux examens.</p>
-                            <a href="<%= request.getContextPath() %>/candidats" class="btn btn-primary w-100">Voir les
-                                Candidats</a>
-                        </div>
-                    </div>
+            <a href="${pageContext.request.contextPath}/note" class="card card-note">
+                <div class="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Matières</h5>
-                            <p class="card-text">Gérer les différentes matières et leurs coefficients.</p>
-                            <a href="<%= request.getContextPath() %>/matieres" class="btn btn-primary w-100">Voir les
-                                Matières</a>
-                        </div>
-                    </div>
+                <h2>Note</h2>
+                <p>Gestion des candidats et notes d'examen</p>
+                <div class="card-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Correcteurs</h5>
-                            <p class="card-text">Gérer la liste des correcteurs d'examen.</p>
-                            <a href="<%= request.getContextPath() %>/correcteurs" class="btn btn-primary w-100">Voir les
-                                Correcteurs</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Opérateurs</h5>
-                            <p class="card-text">Gérer les opérateurs mathématiques pour les calculs.</p>
-                            <a href="<%= request.getContextPath() %>/operateurs" class="btn btn-primary w-100">Voir les
-                                Opérateurs</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Résolutions</h5>
-                            <p class="card-text">Gérer les différentes résolutions possibles.</p>
-                            <a href="<%= request.getContextPath() %>/resolutions" class="btn btn-primary w-100">Voir les
-                                Résolutions</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Paramètres</h5>
-                            <p class="card-text">Configurer les paramètres globaux du système.</p>
-                            <a href="<%= request.getContextPath() %>/parametres" class="btn btn-primary w-100">Voir les
-                                Paramètres</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4">
-                    <div class="card h-100 shadow border-primary">
-                        <div class="card-body">
-                            <h4 class="card-title text-primary">Saisie des Notes</h4>
-                            <p class="card-text">Saisir de nouvelles notes ou associer des notes aux correcteurs.</p>
-                            <a href="<%= request.getContextPath() %>/notes"
-                                class="btn btn-primary text-white w-100">Gérer les Notes</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4">
-                    <div class="card h-100 shadow border-success">
-                        <div class="card-body">
-                            <h4 class="card-title text-success">Note Finale par Candidat/Matière</h4>
-                            <p class="card-text">Consulter le récapitulatif de la note finale pour un candidat à une
-                                matière spécifique.</p>
-                            <a href="<%= request.getContextPath() %>/notes/final"
-                                class="btn btn-success text-white w-100">Voir la Note Finale</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-
-    </html>
+            </a>
+        </main>
+    </div>
+</body>
+</html>
