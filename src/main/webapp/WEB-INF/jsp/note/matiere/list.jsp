@@ -17,7 +17,7 @@
                         <div class="container mt-5">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h2>Liste des Matières</h2>
-                                <a href="<%= request.getContextPath() %>/matieres/new" class="btn btn-primary">Ajouter
+                                <a href="<%= request.getContextPath() %>/note/matieres/new" class="btn btn-primary">Ajouter
                                     une Matière</a>
                             </div>
 
@@ -43,9 +43,9 @@
                                                 <%= m.getCoefficient() %>
                                             </td>
                                             <td>
-                                                <a href="<%= request.getContextPath() %>/matieres/edit/<%= m.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/note/matieres/edit/<%= m.getId() %>"
                                                     class="btn btn-sm btn-warning">Éditer</a>
-                                                <a href="<%= request.getContextPath() %>/matieres/delete/<%= m.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/note/matieres/delete/<%= m.getId() %>"
                                                     class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?');">Supprimer</a>
                                             </td>
@@ -53,7 +53,7 @@
                                         <% } } %>
                                 </tbody>
                             </table>
-                            <a href="<%= request.getContextPath() %>/" class="btn btn-secondary">Retour à l'accueil</a>
+                            <a href="<%= request.getContextPath() %>/note" class="btn btn-secondary">Retour à l'accueil</a>
                         </div>
                     </body>
 

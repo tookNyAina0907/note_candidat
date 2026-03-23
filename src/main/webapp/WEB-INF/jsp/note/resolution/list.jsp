@@ -17,7 +17,7 @@
                         <div class="container mt-5">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h2>Liste des Résolutions</h2>
-                                <a href="<%= request.getContextPath() %>/resolutions/new"
+                                <a href="<%= request.getContextPath() %>/note/resolutions/new"
                                     class="btn btn-primary">Ajouter une Résolution</a>
                             </div>
 
@@ -39,9 +39,9 @@
                                                 <%= r.getNom() %>
                                             </td>
                                             <td>
-                                                <a href="<%= request.getContextPath() %>/resolutions/edit/<%= r.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/note/resolutions/edit/<%= r.getId() %>"
                                                     class="btn btn-sm btn-warning">Éditer</a>
-                                                <a href="<%= request.getContextPath() %>/resolutions/delete/<%= r.getId() %>"
+                                                <a href="<%= request.getContextPath() %>/note/resolutions/delete/<%= r.getId() %>"
                                                     class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette résolution ?');">Supprimer</a>
                                             </td>
@@ -49,7 +49,7 @@
                                         <% } } %>
                                 </tbody>
                             </table>
-                            <a href="<%= request.getContextPath() %>/" class="btn btn-secondary">Retour à l'accueil</a>
+                            <a href="<%= request.getContextPath() %>/note" class="btn btn-secondary">Retour à l'accueil</a>
                         </div>
                     </body>
 

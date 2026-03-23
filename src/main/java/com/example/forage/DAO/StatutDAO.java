@@ -6,5 +6,7 @@ import com.example.forage.model.*;
 
 @Repository
 public interface StatutDAO extends JpaRepository<Statut, Long> {
+
+    Statut findByNom(String nom);
     
 }

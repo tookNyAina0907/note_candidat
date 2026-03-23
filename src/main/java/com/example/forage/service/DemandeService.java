@@ -34,4 +34,13 @@ public class DemandeService {
     public List<Demande> getAllDemandes() {
         return demandeDAO.findAll();
     }
+    public void sortStatutByDate(Demande demande){
+        demande.getDemandeStatuts().sort((s1, s2) -> s2.getDateStatut().compareTo(s1.getDateStatut()));
+    }
+    public void sortAllStatutByDate(List<Demande> demandes){
+        for (Demande demande : demandes) {
+            sortStatutByDate(demande);
+        }
+    }
+
 }

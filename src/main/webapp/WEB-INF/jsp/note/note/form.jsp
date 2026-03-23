@@ -20,7 +20,7 @@
 <div class="container mt-5">
     <h2><%= title %></h2>
 
-    <form action="<%= request.getContextPath() %>/notes/save" method="post" class="mt-4">
+    <form action="<%= request.getContextPath() %>/note/notes/save" method="post" class="mt-4">
         <% if (isEdit) { %>
             <input type="hidden" name="id" value="<%= note.getId() %>"/>
         <% } %>
@@ -119,7 +119,7 @@
 
         <div>
             <button type="submit" class="btn btn-success">Enregistrer</button>
-            <a href="<%= request.getContextPath() %>/notes" class="btn btn-secondary">Annuler</a>
+            <a href="<%= request.getContextPath() %>/note/notes" class="btn btn-secondary">Annuler</a>
         </div>
     </form>
 </div>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/correcteurs")
+@RequestMapping("/note/correcteurs")
 public class CorrecteurController {
 
     @Autowired
@@ -32,14 +32,14 @@ public class CorrecteurController {
     @PostMapping("/save")
     public String saveCorrecteur(@ModelAttribute("correcteur") Correcteur correcteur) {
         correcteurService.saveCorrecteur(correcteur);
-        return "redirect:/correcteurs";
+        return "redirect:/note/correcteurs";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
         Correcteur correcteur = correcteurService.getCorrecteurById(id);
         if (correcteur == null) {
-            return "redirect:/correcteurs";
+            return "redirect:/note/correcteurs";
         }
         model.addAttribute("correcteur", correcteur);
         return "note/correcteur/form";
@@ -48,6 +48,6 @@ public class CorrecteurController {
     @GetMapping("/delete/{id}")
     public String deleteCorrecteur(@PathVariable("id") Integer id) {
         correcteurService.deleteCorrecteurById(id);
-        return "redirect:/correcteurs";
+        return "redirect:/note/correcteurs";
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/parametres")
+@RequestMapping("/note/parametres")
 public class ParametreController {
 
     @Autowired
@@ -44,14 +44,14 @@ public class ParametreController {
     @PostMapping("/save")
     public String saveParametre(@ModelAttribute("parametre") Parametre parametre) {
         parametreService.saveParametre(parametre);
-        return "redirect:/parametres";
+        return "redirect:/note/parametres";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
         Parametre parametre = parametreService.getParametreById(id);
         if (parametre == null) {
-            return "redirect:/parametres";
+            return "redirect:/note/parametres";
         }
         model.addAttribute("parametre", parametre);
         model.addAttribute("matieres", matiereService.getAllMatieres());
@@ -63,6 +63,6 @@ public class ParametreController {
     @GetMapping("/delete/{id}")
     public String deleteParametre(@PathVariable("id") Integer id) {
         parametreService.deleteParametreById(id);
-        return "redirect:/parametres";
+        return "redirect:/note/parametres";
     }
 }

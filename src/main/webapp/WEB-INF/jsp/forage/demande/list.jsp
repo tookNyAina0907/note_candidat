@@ -6,7 +6,7 @@
 <main>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
         <h2>Liste des Demandes de Forage</h2>
-        <a href="${pageContext.request.contextPath}/demande/form" class="btn">Nouvelle Demande</a>
+        <a href="${pageContext.request.contextPath}/forage/demande/form" class="btn">Nouvelle Demande</a>
     </div>
     <table>
         <thead>
@@ -16,6 +16,7 @@
                 <th>District</th>
                 <th>Lieu</th>
                 <th>Date</th>
+                <th>statut</th>
                 <th style="text-align: right;">Actions</th>
             </tr>
         </thead>
@@ -27,9 +28,12 @@
                     <td>${demande.district}</td>
                     <td>${demande.lieu}</td>
                     <td>${demande.dateDemande}</td>
+                    <c:if test="${not empty demande.demandeStatuts}">
+                        <td>${demande.demandeStatuts[0].statut.nom}</td>
+                    </c:if>
                     <td style="text-align: right;">
-                        <a href="${pageContext.request.contextPath}/demande/edit/${demande.id}" class="action-edit">Modifier</a>
-                        <a href="${pageContext.request.contextPath}/demande/delete/${demande.id}" class="action-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">Supprimer</a>
+                        <a href="${pageContext.request.contextPath}/forage/demande/edit/${demande.id}" class="action-edit">Modifier</a>
+                        <a href="${pageContext.request.contextPath}/forage/demande/delete/${demande.id}" class="action-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">Supprimer</a>
                     </td>
                 </tr>
             </c:forEach>

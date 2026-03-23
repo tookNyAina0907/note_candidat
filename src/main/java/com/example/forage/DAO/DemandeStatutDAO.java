@@ -8,4 +8,5 @@ import com.example.forage.model.DemandeStatut;
 @Repository
 public interface DemandeStatutDAO extends JpaRepository<DemandeStatut, Long> {
     
+    
 }

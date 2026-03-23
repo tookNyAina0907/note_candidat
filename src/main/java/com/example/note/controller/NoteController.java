@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/notes")
+@RequestMapping("/note/notes")
 public class NoteController {
 
     @Autowired
@@ -58,7 +58,7 @@ public class NoteController {
             populateDropdowns(model);
             return "note/note/form";
         }
-        return "redirect:/notes";
+        return "redirect:/note/notes";
     }
 
     @PostMapping("/save")
@@ -95,13 +95,13 @@ public class NoteController {
                 }
             }
         }
-        return "redirect:/notes";
+        return "redirect:/note/notes";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteNote(@PathVariable("id") Integer id) {
         noteService.deleteNoteById(id);
-        return "redirect:/notes";
+        return "redirect:/note/notes";
     }
 
     private void populateDropdowns(Model model) {

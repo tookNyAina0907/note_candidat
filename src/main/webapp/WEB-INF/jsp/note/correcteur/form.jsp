@@ -19,7 +19,7 @@
                         <%= title %>
                     </h2>
 
-                    <form action="<%= request.getContextPath() %>/correcteurs/save" method="post" class="mt-4">
+                    <form action="<%= request.getContextPath() %>/note/correcteurs/save" method="post" class="mt-4">
                         <% if (correcteur !=null && correcteur.getId() !=null) { %>
                             <input type="hidden" name="id" value="<%= correcteur.getId() %>" />
                             <% } %>
@@ -46,7 +46,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-success">Enregistrer</button>
-                                <a href="<%= request.getContextPath() %>/correcteurs"
+                                <a href="<%= request.getContextPath() %>/note/correcteurs"
                                     class="btn btn-secondary">Annuler</a>
                     </form>
                 </div>

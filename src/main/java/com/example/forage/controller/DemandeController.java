@@ -9,9 +9,11 @@ import org.springframework.ui.*;
 import com.example.forage.model.*;
 import com.example.forage.service.ClientService;
 import com.example.forage.service.DemandeService;
+import com.example.forage.service.DemandeStatutService;
+import com.example.forage.service.StatutService;
 
 @Controller
-@RequestMapping("/demande")
+@RequestMapping("/forage/demande")
 public class DemandeController {
     @Autowired
     private DemandeService demandeService;
@@ -19,9 +21,16 @@ public class DemandeController {
     @Autowired
     private ClientService clientService;
 
+    @Autowired
+    private StatutService statutService;
+
+    @Autowired
+    private DemandeStatutService demandeStatutService;
+
     @GetMapping
     public String getAllDemandes(Model model) {
         List<Demande> demandes = demandeService.getAllDemandes();
+        demandeService.sortAllStatutByDate(demandes);
         model.addAttribute("demandes", demandes);
         return "forage/demande/list";
     }
@@ -39,9 +48,15 @@ public class DemandeController {
         if (demande.getId() != null) {
             demandeService.updateDemande(demande.getId(), demande);
         } else {
-            demandeService.saveDemande(demande);
+            Demande saved = demandeService.saveDemande(demande);
+            Statut statut = statutService.getStatutById(1L);
+            DemandeStatut demandeStatut = new DemandeStatut();
+                demandeStatut.setDateStatut(LocalDateTime.now());
+                demandeStatut.setDemande(saved);
+                demandeStatut.setStatut(statut);
+            demandeStatutService.saveDemandeStatut(demandeStatut);
         }
-        return "redirect:/demande";
+        return "redirect:/forage/demande";
     }
 
     @GetMapping("/edit/{id}")
@@ -55,7 +70,7 @@ public class DemandeController {
     @GetMapping("/delete/{id}")
     public String deleteDemande(@PathVariable("id") Long id) {
         demandeService.deleteDemande(id);
-        return "redirect:/demande";
+        return "redirect:/forage/demande";
     }
 
 }

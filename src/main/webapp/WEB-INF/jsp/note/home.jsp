@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Candidats</h5>
                             <p class="card-text">Gérer la liste des candidats inscrits aux examens.</p>
-                            <a href="<%= request.getContextPath() %>/candidats" class="btn btn-primary w-100">Voir les
+                            <a href="<%= request.getContextPath() %>/note/candidats" class="btn btn-primary w-100">Voir les
                                 Candidats</a>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Matières</h5>
                             <p class="card-text">Gérer les différentes matières et leurs coefficients.</p>
-                            <a href="<%= request.getContextPath() %>/matieres" class="btn btn-primary w-100">Voir les
+                            <a href="<%= request.getContextPath() %>/note/matieres" class="btn btn-primary w-100">Voir les
                                 Matières</a>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Correcteurs</h5>
                             <p class="card-text">Gérer la liste des correcteurs d'examen.</p>
-                            <a href="<%= request.getContextPath() %>/correcteurs" class="btn btn-primary w-100">Voir les
+                            <a href="<%= request.getContextPath() %>/note/correcteurs" class="btn btn-primary w-100">Voir les
                                 Correcteurs</a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Opérateurs</h5>
                             <p class="card-text">Gérer les opérateurs mathématiques pour les calculs.</p>
-                            <a href="<%= request.getContextPath() %>/operateurs" class="btn btn-primary w-100">Voir les
+                            <a href="<%= request.getContextPath() %>/note/operateurs" class="btn btn-primary w-100">Voir les
                                 Opérateurs</a>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Résolutions</h5>
                             <p class="card-text">Gérer les différentes résolutions possibles.</p>
-                            <a href="<%= request.getContextPath() %>/resolutions" class="btn btn-primary w-100">Voir les
+                            <a href="<%= request.getContextPath() %>/note/resolutions" class="btn btn-primary w-100">Voir les
                                 Résolutions</a>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Paramètres</h5>
                             <p class="card-text">Configurer les paramètres globaux du système.</p>
-                            <a href="<%= request.getContextPath() %>/parametres" class="btn btn-primary w-100">Voir les
+                            <a href="<%= request.getContextPath() %>/note/parametres" class="btn btn-primary w-100">Voir les
                                 Paramètres</a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="card-body">
                             <h4 class="card-title text-primary">Saisie des Notes</h4>
                             <p class="card-text">Saisir de nouvelles notes ou associer des notes aux correcteurs.</p>
-                            <a href="<%= request.getContextPath() %>/notes"
+                            <a href="<%= request.getContextPath() %>/note/notes"
                                 class="btn btn-primary text-white w-100">Gérer les Notes</a>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                             <h4 class="card-title text-success">Note Finale par Candidat/Matière</h4>
                             <p class="card-text">Consulter le récapitulatif de la note finale pour un candidat à une
                                 matière spécifique.</p>
-                            <a href="<%= request.getContextPath() %>/notes/final"
+                            <a href="<%= request.getContextPath() %>/note/notes/final"
                                 class="btn btn-success text-white w-100">Voir la Note Finale</a>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div class="card-body">
                             <h4 class="card-title text-success">Voir tout les notes </h4>
                             <p class="card-text">Consulter le récapitulatif de la note finale des candidat </p>
-                            <a href="<%= request.getContextPath() %>/notes/final/note"
+                            <a href="<%= request.getContextPath() %>/note/notes/final/note"
                                 class="btn btn-success text-white w-100">Voir la Note Finale</a>
                         </div>
                     </div>

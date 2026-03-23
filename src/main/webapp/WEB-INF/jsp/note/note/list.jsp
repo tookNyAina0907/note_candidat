@@ -16,7 +16,7 @@
                     <div class="container mt-5">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h2>Liste des Notes</h2>
-                            <a href="<%= request.getContextPath() %>/notes/new" class="btn btn-primary">Saisir des
+                            <a href="<%= request.getContextPath() %>/note/notes/new" class="btn btn-primary">Saisir des
                                 Notes</a>
                         </div>
 
@@ -52,9 +52,9 @@
                                                                         <%= n.getNote() %>
                                                                     </strong></td>
                                                                 <td class="text-end">
-                                                                    <a href="<%= request.getContextPath() %>/notes/edit/<%= n.getId() %>"
+                                                                    <a href="<%= request.getContextPath() %>/note/notes/edit/<%= n.getId() %>"
                                                                         class="btn btn-sm btn-warning">Éditer</a>
-                                                                    <a href="<%= request.getContextPath() %>/notes/delete/<%= n.getId() %>"
+                                                                    <a href="<%= request.getContextPath() %>/note/notes/delete/<%= n.getId() %>"
                                                                         class="btn btn-sm btn-danger px-2"
                                                                         onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette note ?');">X</a>
                                                                 </td>
@@ -66,7 +66,7 @@
                                             <% } } %>
                             </tbody>
                         </table>
-                        <a href="<%= request.getContextPath() %>/" class="btn btn-secondary">Retour à l'accueil</a>
+                        <a href="<%= request.getContextPath() %>/note" class="btn btn-secondary">Retour à l'accueil</a>
                     </div>
                 </body>
 

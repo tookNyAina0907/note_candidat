@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/candidats")
+@RequestMapping("/note/candidats")
 public class CandidatController {
 
     @Autowired
@@ -32,14 +32,14 @@ public class CandidatController {
     @PostMapping("/save")
     public String saveCandidat(@ModelAttribute("candidat") Candidat candidat) {
         candidatService.saveCandidat(candidat);
-        return "redirect:/candidats";
+        return "redirect:/note/candidats";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
         Candidat candidat = candidatService.getCandidatById(id);
         if (candidat == null) {
-            return "redirect:/candidats";
+            return "redirect:/note/candidats";
         }
         model.addAttribute("candidat", candidat);
         return "note/candidat/form";
@@ -48,6 +48,6 @@ public class CandidatController {
     @GetMapping("/delete/{id}")
     public String deleteCandidat(@PathVariable("id") Integer id) {
         candidatService.deleteCandidatById(id);
-        return "redirect:/candidats";
+        return "redirect:/note/candidats";
     }
 }
