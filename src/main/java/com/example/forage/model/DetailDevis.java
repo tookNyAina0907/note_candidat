@@ -21,14 +21,18 @@ public class DetailDevis {
     @Column(name = "prix" , nullable = false)
     private Double prix;
 
+    @Column(name = "quantite")
+    private Double quantite;
+
     public DetailDevis() {
     }
 
-    public DetailDevis(Long id, Devis devis, String libelle, Double prix) {
+    public DetailDevis(Long id, Devis devis, String libelle, Double prix, Double quantite) {
         this.id = id;
         this.devis = devis;
         this.libelle = libelle;
         this.prix = prix;
+        this.quantite = quantite;
     }
 
     public Long getId() {
@@ -61,6 +65,14 @@ public class DetailDevis {
 
     public void setPrix(Double prix) {
         this.prix = prix;
+    }
+
+    public Double getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Double quantite) {
+        this.quantite = quantite;
     }
 
     
