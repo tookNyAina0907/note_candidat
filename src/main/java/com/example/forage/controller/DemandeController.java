@@ -1,7 +1,9 @@
 package com.example.forage.controller;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -51,9 +53,9 @@ public class DemandeController {
             Demande saved = demandeService.saveDemande(demande);
             Statut statut = statutService.getStatutById(1L);
             DemandeStatut demandeStatut = new DemandeStatut();
-                demandeStatut.setDateStatut(LocalDateTime.now());
-                demandeStatut.setDemande(saved);
-                demandeStatut.setStatut(statut);
+            demandeStatut.setDateStatut(LocalDateTime.now());
+            demandeStatut.setDemande(saved);
+            demandeStatut.setStatut(statut);
             demandeStatutService.saveDemandeStatut(demandeStatut);
         }
         return "redirect:/forage/demande";
@@ -71,6 +73,29 @@ public class DemandeController {
     public String deleteDemande(@PathVariable("id") Long id) {
         demandeService.deleteDemande(id);
         return "redirect:/forage/demande";
+    }
+
+    @GetMapping("/api/{id}")
+    @ResponseBody
+    public Map<String, Object> getDemandeApi(@PathVariable("id") Long id) {
+        Demande demande = demandeService.getDemandeById(id);
+        Map<String, Object> response = new HashMap<>();
+        if (demande != null) {
+            response.put("clientId", demande.getClient().getId());
+            response.put("clientNom", demande.getClient().getNom());
+            response.put("description", demande.getDescription());
+            response.put("dateDemande", demande.getDateDemande().toString());
+            response.put("district", demande.getDistrict());
+            response.put("lieu", demande.getLieu());
+            
+            demandeService.sortStatutByDate(demande);
+            if (demande.getDemandeStatuts() != null && !demande.getDemandeStatuts().isEmpty()) {
+                response.put("statut", demande.getDemandeStatuts().get(0).getStatut().getNom());
+            } else {
+                response.put("statut", "Non défini");
+            }
+        }
+        return response;
     }
 
 }

@@ -3,40 +3,48 @@
 
 <jsp:include page="/WEB-INF/jsp/forage/layout/header.jsp" />
 
-<main>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
-        <h2>Liste des Demandes de Forage</h2>
-        <a href="${pageContext.request.contextPath}/forage/demande/form" class="btn">Nouvelle Demande</a>
+<main class="container">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2.5rem;">
+        <div>
+            <h1 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">Demandes de Forage</h1>
+            <p style="color: #64748b;">Gérez vos demandes et projets de forage</p>
+        </div>
+        <a href="${pageContext.request.contextPath}/forage/demande/form" class="btn-premium">+ Nouvelle Demande</a>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Client</th>
-                <th>District</th>
-                <th>Lieu</th>
-                <th>Date</th>
-                <th>statut</th>
-                <th style="text-align: right;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="demande" items="${demandes}">
+
+    <div class="premium-card">
+        <table class="data-table">
+            <thead>
                 <tr>
-                    <td><span class="drilling-badge">#${demande.id}</span></td>
-                    <td><strong>${demande.client.nom}</strong></td>
-                    <td>${demande.district}</td>
-                    <td>${demande.lieu}</td>
-                    <td>${demande.dateDemande}</td>
-                    <c:if test="${not empty demande.demandeStatuts}">
-                        <td>${demande.demandeStatuts[0].statut.nom}</td>
-                    </c:if>
-                    <td style="text-align: right;">
-                        <a href="${pageContext.request.contextPath}/forage/demande/edit/${demande.id}" class="action-edit">Modifier</a>
-                        <a href="${pageContext.request.contextPath}/forage/demande/delete/${demande.id}" class="action-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">Supprimer</a>
-                    </td>
+                    <th style="width: 80px;">ID</th>
+                    <th>Client / Lieu</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th style="text-align: right;">Actions</th>
                 </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-</main>
+            </thead>
+            <tbody>
+                <c:forEach var="demande" items="${demandes}">
+                    <tr>
+                        <td><span class="drilling-badge">#${demande.id}</span></td>
+                        <td>
+                            <div style="font-weight: 700; color: var(--text-main);">${demande.client.nom}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">${demande.lieu}, ${demande.district}</div>
+                        </td>
+                        <td style="color: var(--text-muted); font-size: 0.95rem;">${demande.dateDemande}</td>
+                        <td>
+                            <c:if test="${not empty demande.demandeStatuts}">
+                                <span class="status-pill primary">${demande.demandeStatuts[0].statut.nom}</span>
+                            </c:if>
+                        </td>
+                        <td style="text-align: right; white-space: nowrap;">
+                            <a href="${pageContext.request.contextPath}/forage/devis/list/${demande.id}" class="action-link">Voir Devis</a>
+                            <a href="${pageContext.request.contextPath}/forage/demande/edit/${demande.id}" class="action-link" style="margin-left: 1rem;">Modifier</a>
+                            <a href="${pageContext.request.contextPath}/forage/demande/delete/${demande.id}" class="action-link delete" style="margin-left: 1rem;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</main>
