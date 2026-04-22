@@ -5,9 +5,13 @@
 
 <main class="container">
     <div style="margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center;">
-        <div>
             <h1 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">Liste des Devis</h1>
             <p style="color: #64748b;">Demande #${demande.id} &bull; ${demande.client.nom}</p>
+            <c:choose>
+                <c:when test="${not empty demande.demandeStatuts}">
+                    <p style="color: #64748b;">${demande.demandeStatuts[0].statut.nom} &bull; statut</p>
+                </c:when>
+            </c:choose>
         </div>
         <a href="${pageContext.request.contextPath}/forage/devis/form?demandeId=${demande.id}" class="btn-premium">+ Nouveau Devis</a>
     </div>
@@ -19,8 +23,8 @@
                 <a href="${pageContext.request.contextPath}/forage/devis/form?demandeId=${demande.id}" class="btn-premium">Créer le premier devis</a>
             </div>
         </c:when>
-        <c:otherwise>
-            <c:forEach var="devis" items="${devisList}">
+    </c:choose>
+    <c:forEach var="devis" items="${devisList}">
                 <div class="premium-card" style="margin-bottom: 2.5rem;">
                     <div class="card-header">
                         <div>
@@ -33,6 +37,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        
                         <table class="data-table">
                             <thead>
                                 <tr>
@@ -70,8 +75,6 @@
                     </div>
                 </div>
             </c:forEach>
-        </c:otherwise>
-    </c:choose>
 
     <div style="margin-top: 2rem;">
         <a href="${pageContext.request.contextPath}/forage/demande" class="btn-premium secondary">&larr; Retour aux demandes</a>

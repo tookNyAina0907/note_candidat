@@ -6,10 +6,6 @@ import java.util.List;
 
 // import jakarta.annotation.Generated;
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "t_devis")
@@ -19,7 +15,7 @@ public class Devis {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name ="date_devis", nullable = false)
+    @Column(name = "date_devis", nullable = false)
     private LocalDateTime dateDevis;
 
     @ManyToOne
@@ -30,14 +26,15 @@ public class Devis {
     @JoinColumn(name = "type_devis_id", nullable = false)
     private TypeDevis typeDevis;
 
-    @OneToMany(mappedBy = "devis", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "devis", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<DetailDevis> detailDevis;
 
-    // public Devis(Long id, LocalDateTime dateDevis, Demande demande, TypeDevis typeDevis) {
-    //     this.id = id;
-    //     this.dateDevis = dateDevis;
-    //     this.demande = demande;
-    //     this.typeDevis = typeDevis;
+    // public Devis(Long id, LocalDateTime dateDevis, Demande demande, TypeDevis
+    // typeDevis) {
+    // this.id = id;
+    // this.dateDevis = dateDevis;
+    // this.demande = demande;
+    // this.typeDevis = typeDevis;
     // }
 
     public Devis(Long id, LocalDateTime dateDevis, Demande demande, TypeDevis typeDevis,
@@ -98,5 +95,5 @@ public class Devis {
     public Long getId() {
         return id;
     }
-    
+
 }

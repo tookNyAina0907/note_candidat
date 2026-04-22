@@ -28,7 +28,7 @@ public class Demande {
     @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Devis> devis;
 
-    @OneToMany(mappedBy = "demande", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "demande", fetch = FetchType.EAGER , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DemandeStatut> demandeStatuts;
 
     @Column(name = "lieu", nullable = false)

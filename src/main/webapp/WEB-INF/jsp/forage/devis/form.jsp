@@ -107,6 +107,6 @@
         <script>
             window.contextPath = '${pageContext.request.contextPath}';
         </script>
-        <script src="${pageContext.request.contextPath}/js/forage/devis_form.js"></script>
+        <script src="${pageContext.request.contextPath}/js/forage/devise_form.js"></script>
 
         <jsp:include page="/WEB-INF/jsp/forage/layout/footer.jsp" />

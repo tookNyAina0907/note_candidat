@@ -12,6 +12,10 @@ public class DemandeService {
     private DemandeDAO demandeDAO;
 
     public Demande getDemandeById(Long id) {
+        if (id == null) {
+            return null;
+            
+        }
         return demandeDAO.findById(id).orElse(null);
     }
     public Demande saveDemande(Demande demande) {
@@ -36,6 +40,9 @@ public class DemandeService {
     }
     public void sortStatutByDate(Demande demande){
         demande.getDemandeStatuts().sort((s1, s2) -> s2.getDateStatut().compareTo(s1.getDateStatut()));
+    }
+    public void sortStatutByMaxId(Demande demande){
+        demande.getDemandeStatuts().sort((s1, s2) -> s2.getId().compareTo(s1.getId()));
     }
     public void sortAllStatutByDate(List<Demande> demandes){
         for (Demande demande : demandes) {

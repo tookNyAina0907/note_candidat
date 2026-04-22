@@ -3,6 +3,7 @@ package com.example.forage.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.forage.DAO.DetailDevisDAO;
 import com.example.forage.DAO.DevisDAO;
 import com.example.forage.model.*;
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.List;
 public class DevisService {
     @Autowired
     private DevisDAO devisDAO;
+
+    @Autowired
+    private DetailDevisDAO detailDevisDAO;
     
     public Devis saveDevis(Devis devis){
         return devisDAO.save(devis);
@@ -26,5 +30,11 @@ public class DevisService {
     }
     public List<Devis> getDevisByDemande(Demande demande){
         return devisDAO.findByDemande(demande);
+    }
+    public Double totalt(){
+        return detailDevisDAO.devistotal();
+    }
+    public List<Devis> getAllDevis() {
+        return devisDAO.findAll();
     }
 }

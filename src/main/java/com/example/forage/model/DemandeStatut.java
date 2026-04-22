@@ -2,7 +2,14 @@ package com.example.forage.model;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "t_demande_statut")
@@ -21,6 +28,23 @@ public class DemandeStatut {
 
     @Column(name = "date_statut", nullable = false)
     private LocalDateTime dateStatut;
+
+    @Column(name = "observation")
+    private String observation;
+
+    public DemandeStatut(Long id, Demande demande, Statut statut, LocalDateTime dateStatut, String observation) {
+        this.id = id;
+        this.demande = demande;
+        this.statut = statut;
+        this.dateStatut = dateStatut;
+        this.observation = observation;
+    }
+    public String getObservation() {
+        return observation;
+    }
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
     public DemandeStatut() {
     }
     public DemandeStatut(Long id, Demande demande, Statut statut, LocalDateTime dateStatut) {
