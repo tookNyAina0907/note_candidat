@@ -20,6 +20,7 @@
                 <li><a href="${pageContext.request.contextPath}/forage/client">Clients</a></li>
                 <li><a href="${pageContext.request.contextPath}/forage/demande">Demandes</a></li>
                 <li><a href="${pageContext.request.contextPath}/forage/devis/form">Nouveau Devis</a></li>
+                <li><a href="${pageContext.request.contextPath}/forage/dashboard">Chiffre d'affaire</a></li>
             </ul>
         </nav>
     </header>

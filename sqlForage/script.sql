@@ -53,3 +53,11 @@ CREATE TABLE t_demande_statut(
     FOREIGN KEY (demande_id) REFERENCES t_demande(id),
     FOREIGN KEY (statut_id) REFERENCES t_statut(id)
 );
+ALTER TABLE t_demande_statut ADD COLUMN observation VARCHAR(250);
+
+CREATE TABLE t_parametre(
+    id SERIAL PRIMARY KEY,
+    remise DECIMAL(10,2)
+);
+SELECT SUM(prix*quantite) as devis_total
+FROM t_detail_devis;

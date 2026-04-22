@@ -1,5 +1,6 @@
 package com.example.forage.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.*;
+
+import com.example.forage.DAO.ParametreDAO_forage;
 import com.example.forage.model.*;
 import com.example.forage.service.ClientService;
 import com.example.forage.service.DemandeService;
@@ -28,6 +31,9 @@ public class DemandeController {
 
     @Autowired
     private DemandeStatutService demandeStatutService;
+
+    @Autowired 
+    private ParametreDAO_forage parametreDAO;
 
     @GetMapping
     public String getAllDemandes(Model model) {
@@ -79,6 +85,7 @@ public class DemandeController {
     @ResponseBody
     public Map<String, Object> getDemandeApi(@PathVariable("id") Long id) {
         Demande demande = demandeService.getDemandeById(id);
+        Parametre_forage parametre = parametreDAO.findAll().get(0);
         Map<String, Object> response = new HashMap<>();
         if (demande != null) {
             response.put("clientId", demande.getClient().getId());
@@ -87,6 +94,7 @@ public class DemandeController {
             response.put("dateDemande", demande.getDateDemande().toString());
             response.put("district", demande.getDistrict());
             response.put("lieu", demande.getLieu());
+            response.put("parametre", parametre.getNom());
             
             demandeService.sortStatutByDate(demande);
             if (demande.getDemandeStatuts() != null && !demande.getDemandeStatuts().isEmpty()) {
@@ -96,6 +104,84 @@ public class DemandeController {
             }
         }
         return response;
+    }
+
+    @GetMapping("/statut/{id}")
+    public String showStatutHistory(@PathVariable("id") Long id, 
+                                    @RequestParam(value = "startDate", required = false) String startDateStr,
+                                    @RequestParam(value = "endDate", required = false) String endDateStr,
+                                    Model model) {
+        Demande demande = demandeService.getDemandeById(id);
+        if (demande != null) {
+            List<DemandeStatut> filteredStatuts = null;
+            if (startDateStr != null && !startDateStr.isEmpty() && endDateStr != null && !endDateStr.isEmpty()) {
+                try {
+                    LocalDateTime start = LocalDate.parse(startDateStr).atStartOfDay();
+                    LocalDateTime end = LocalDate.parse(endDateStr).atTime(23, 59, 59);
+                    filteredStatuts = demandeStatutService.getFilteredStatuts(id, start, end);
+                    if (filteredStatuts != null) {
+                        filteredStatuts.sort((s1, s2) -> s2.getDateStatut().compareTo(s1.getDateStatut()));
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+            
+            demandeService.sortStatutByDate(demande);
+            model.addAttribute("demande", demande);
+            model.addAttribute("history", filteredStatuts != null ? filteredStatuts : demande.getDemandeStatuts());
+            model.addAttribute("startDate", startDateStr);
+            model.addAttribute("endDate", endDateStr);
+            return "forage/demande/statut_list";
+        }
+        return "redirect:/forage/demande";
+    }
+
+    @GetMapping("/statut/form/{id}")
+    public String showStatutForm(@PathVariable("id") Long id, Model model) {
+        Demande demande = demandeService.getDemandeById(id);
+        if (demande != null) {
+            model.addAttribute("demande", demande);
+            model.addAttribute("statuts", statutService.getAll());
+            return "forage/demande/statut";
+        }
+        return "redirect:/forage/demande";
+    }
+
+    @PostMapping("/statut/update")
+    public String updateStatut(@RequestParam("demandeId") Long demandeId, 
+                               @RequestParam("statutId") Long statutId, 
+                               @RequestParam("observation") String observation) {
+        Demande demande = demandeService.getDemandeById(demandeId);
+        Statut statut = statutService.getStatutById(statutId);
+        
+        if (demande != null && statut != null) {
+            DemandeStatut demandeStatut = new DemandeStatut();
+            demandeStatut.setDemande(demande);
+            demandeStatut.setStatut(statut);
+            demandeStatut.setObservation(observation);
+            demandeStatut.setDateStatut(LocalDateTime.now());
+            demandeStatutService.saveDemandeStatut(demandeStatut);
+        }
+        return "redirect:/forage/demande/statut/" + demandeId;
+    }
+    @PostMapping("/statut/edit")
+    public String editStatut(@RequestParam("id") Long id,
+                             @RequestParam("demandeId") Long demandeId,
+                             @RequestParam("date") String dateStr,
+                             @RequestParam("observation") String observation) {
+        DemandeStatut demandeStatut = demandeStatutService.findById(id);
+        if (demandeStatut != null) {
+            try {
+                LocalDateTime date = LocalDateTime.parse(dateStr);
+                demandeStatut.setDateStatut(date);
+                demandeStatut.setObservation(observation);
+                demandeStatutService.saveDemandeStatut(demandeStatut);
+            } catch (Exception e) {
+               
+            }
+        }
+        return "redirect:/forage/demande/statut/" + demandeId;
     }
 
 }

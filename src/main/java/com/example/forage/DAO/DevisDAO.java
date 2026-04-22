@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface DevisDAO extends JpaRepository<Devis, Long> {
     List<Devis> findByDemande(Demande demande);
+    
 }

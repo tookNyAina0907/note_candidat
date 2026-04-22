@@ -3,10 +3,15 @@ package com.example.forage.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.forage.DAO.DetailDevisDAO;
+import com.example.forage.DAO.ParametreDAO_forage;
 import com.example.forage.model.*;
 import com.example.forage.service.*;
 
@@ -27,6 +32,12 @@ public class DevisController {
     private StatutService statutService;
     @Autowired
     private DemandeStatutService demandeStatutService;
+
+    // @Autowired 
+    // private DetailDevisDAO detailDevisDAO;
+
+    @Autowired
+    private ParametreDAO_forage parametreDAO;
 
     @GetMapping("/form")
     public String showForm(@RequestParam(value = "demandeId", required = false) Long demandeId, Model model) {
@@ -58,39 +69,103 @@ public class DevisController {
         devis.setDateDevis(LocalDateTime.now());
         
         List<DetailDevis> details = new ArrayList<>();
+        Parametre_forage parametre = parametreDAO.findAll().get(0);
         if (libelles != null && prixs != null && qtes != null && 
             libelles.length == prixs.length && libelles.length == qtes.length) {
             for (int i = 0; i < libelles.length; i++) {
+                double prixremise = 0;
+                if (prixs[i]>=1000000) {
+                    prixremise = prixs[i] - (prixs[i]*parametre.getNom())/100;
+                }else{
+                    prixremise = prixs[i];
+                }
                 DetailDevis detail = new DetailDevis();
                 detail.setLibelle(libelles[i]);
-                detail.setPrix(prixs[i]);
+                detail.setPrix(prixremise);
                 detail.setQuantite(qtes[i]);
                 detail.setDevis(devis);
                 details.add(detail);
             }
         }
+        demandeService.sortStatutByDate(demande);
         devis.setDetailDevis(details);
-        Long id = demande.getDemandeStatuts().get(0).getId() + 1L;
+        Statut goodStatut = statutService.getBonStatut(typeDevis,0);
         devisService.saveDevis(devis);
         DemandeStatut demandeStatut = new DemandeStatut();
         demandeStatut.setDateStatut(LocalDateTime.now());
         demandeStatut.setDemande(demande);
-        demandeStatut.setStatut(statutService.getStatutById(id));
+        demandeStatut.setStatut(goodStatut);
         demandeStatutService.saveDemandeStatut(demandeStatut);
         
-        return "redirect:/forage/demande"; // Redirect to demande list for now
+        return "redirect:/forage/demande"; 
     }
 
-    @GetMapping("/list/{demandeId}")
-    public String listDevisByDemande(@PathVariable("demandeId") Long demandeId, Model model) {
+    @GetMapping({"list","/list/{demandeId}"})
+    public String listDevisByDemande(@PathVariable(value = "demandeId",required = false) Optional<Long> demandeId, Model model) {
+        Demande demande = demandeService.getDemandeById(demandeId.orElse(null));
+        // demandeService.sortStatutByDate(demande);
+        List<Devis> devisList = new ArrayList<>();
+        if (demande == null) {
+
+            // return "redirect:/forage/demande?error=not_found";
+            devisList = devisService.getAllDevis();
+            
+            model.addAttribute("devisList", devisList);
+        }else{
+            devisList = devisService.getDevisByDemande(demande);
+            model.addAttribute("devisList", devisList);
+            model.addAttribute("demande", demande);
+        }
+        
+        // List<Devis> devisList = devisService.getDevisByDemande(demande);
+        // model.addAttribute("devisList", devisList);
+        return "forage/devis/list";
+    }
+
+    @GetMapping("/valider/{demandeId}/{devisId}")
+    public String validerDevis(@PathVariable("demandeId") Long demandeId, @PathVariable("devisId") Long devisId, Model model) {
         Demande demande = demandeService.getDemandeById(demandeId);
+        demandeService.sortStatutByDate(demande);
+        Devis devis = devisService.getDevisById(devisId);
+        TypeDevis typeDevis = devis.getTypeDevis();
+        Statut goodStatut = statutService.getBonStatut(typeDevis,1);
+        DemandeStatut demandeStatut = new DemandeStatut();
+        demandeStatut.setDateStatut(LocalDateTime.now());
+        demandeStatut.setDemande(demande);
+        demandeStatut.setStatut(goodStatut);
+        demandeStatutService.saveDemandeStatut(demandeStatut);
+        
+
         if (demande == null) {
             return "redirect:/forage/demande?error=not_found";
         }
-        
-        List<Devis> devisList = devisService.getDevisByDemande(demande);
-        model.addAttribute("demande", demande);
-        model.addAttribute("devisList", devisList);
-        return "forage/devis/list";
+        return "redirect:/forage/devis/list/"+demandeId;
     }
+    
+    @GetMapping("/refuser/{demandeId}/{devisId}")
+    public String refuserDevis(@PathVariable("demandeId") Long demandeId, @PathVariable("devisId") Long devisId, Model model) {
+        Demande demande = demandeService.getDemandeById(demandeId);
+        demandeService.sortStatutByDate(demande);
+        Devis devis = devisService.getDevisById(devisId);
+        TypeDevis typeDevis = devis.getTypeDevis();
+        Statut goodStatut = statutService.getBonStatut(typeDevis,2);
+        DemandeStatut demandeStatut = new DemandeStatut();
+        demandeStatut.setDateStatut(LocalDateTime.now());
+        demandeStatut.setDemande(demande);
+        demandeStatut.setStatut(goodStatut);
+        demandeStatutService.saveDemandeStatut(demandeStatut);
+        
+
+        if (demande == null) {
+            return "redirect:/forage/demande?error=not_found";
+        }
+        return "redirect:/forage/devis/list/"+demandeId;
+    }
+
+    // @GetMapping("chiffre_affaire")
+    // public String chiffreDaffaire(Model model) {
+    //     Double chiffreAffaire = devisService.totalt();
+    //     model.addAttribute("chiffre", chiffreAffaire);
+    //     return "forage/devis_total/list";
+    // }
 }

@@ -1,3 +1,4 @@
+let remise = 0;
 function fetchDemandeInfo(id) {
     const infoTableContainer = document.getElementById('infoTableContainer');
     if (!id) {
@@ -17,6 +18,7 @@ function fetchDemandeInfo(id) {
                 document.getElementById('cellDateDemande').textContent = data.dateDemande;
                 document.getElementById('cellLieuDistrict').textContent = `${data.lieu} / ${data.district}`;
                 document.getElementById('cellDescription').textContent = data.description;
+                remise = data.parametre;
                 infoTableContainer.style.display = 'block';
             } else {
                 infoTableContainer.style.display = 'none';
@@ -30,10 +32,17 @@ function fetchDemandeInfo(id) {
 
 function updateCalculations(input) {
     const row = input.closest('tr');
+    let prixremise = parseFloat(row.querySelector('input[name="prix[]"]')) || 0 ;
     const prix = parseFloat(row.querySelector('input[name="prix[]"]').value) || 0;
+    if (prix >= 1000000) {
+        prixremise = prix - (prix*10)/100;
+    }else{
+        prixremise = prix;
+    }
+    console.log(prixremise + "aaaaaaaaaaaa");
     const qte = parseFloat(row.querySelector('input[name="qte[]"]').value) || 0;
-    const totalLine = prix * qte;
-    
+    const totalLine = prixremise * qte;
+    row.querySelector('input[name="prix[]"]').innerHTML = prixremise.toLocaleString('fr-FR'); 
     row.querySelector('.line-total').textContent = totalLine.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Ar';
     
     calculateTotal();

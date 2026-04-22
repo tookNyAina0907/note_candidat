@@ -38,6 +38,7 @@
                             </c:if>
                         </td>
                         <td style="text-align: right; white-space: nowrap;">
+                            <a href="${pageContext.request.contextPath}/forage/demande/statut/${demande.id}" class="action-link" style="color: var(--warning-color);">Statut</a>
                             <a href="${pageContext.request.contextPath}/forage/devis/list/${demande.id}" class="action-link">Voir Devis</a>
                             <a href="${pageContext.request.contextPath}/forage/demande/edit/${demande.id}" class="action-link" style="margin-left: 1rem;">Modifier</a>
                             <a href="${pageContext.request.contextPath}/forage/demande/delete/${demande.id}" class="action-link delete" style="margin-left: 1rem;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">Supprimer</a>
@@ -47,4 +48,4 @@
             </tbody>
         </table>
     </div>
-</main>
+</main>
