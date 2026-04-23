@@ -38,16 +38,11 @@ public class DemandeService {
     public List<Demande> getAllDemandes() {
         return demandeDAO.findAll();
     }
-    public void sortStatutByDate(Demande demande){
-        demande.getDemandeStatuts().sort((s1, s2) -> s2.getDateStatut().compareTo(s1.getDateStatut()));
+    public List<Demande> getDemandesByClientId(Long clientId) {
+        return demandeDAO.findByClientId(clientId);
     }
-    public void sortStatutByMaxId(Demande demande){
-        demande.getDemandeStatuts().sort((s1, s2) -> s2.getId().compareTo(s1.getId()));
-    }
-    public void sortAllStatutByDate(List<Demande> demandes){
-        for (Demande demande : demandes) {
-            sortStatutByDate(demande);
-        }
+    public List<Demande> getDemandesByCurrentStatutId(Long statutId) {
+        return demandeDAO.findByCurrentStatutId(statutId);
     }
 
 }

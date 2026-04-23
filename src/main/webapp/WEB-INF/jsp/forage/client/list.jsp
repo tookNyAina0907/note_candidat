@@ -22,6 +22,7 @@
                     <td>${client.nom}</td>
                     <td><span class="drilling-badge">${client.contact}</span></td>
                     <td style="text-align: right;">
+                        <a href="${pageContext.request.contextPath}/forage/demande/dclient/${client.id}" class="action-view">Voir demande</a>
                         <a href="${pageContext.request.contextPath}/forage/client/edit/${client.id}" class="action-edit">Modifier</a>
                         <a href="${pageContext.request.contextPath}/forage/client/delete/${client.id}" class="action-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?');">Supprimer</a>
                     </td>

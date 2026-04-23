@@ -30,4 +30,7 @@ public class DemandeStatutService {
     public Long countByStatutId(Long statutId) {
         return demandeStatutDAO.countByStatutId(statutId);
     }
+    public List<DemandeStatut> findByStatutId(Long statutId) {
+        return demandeStatutDAO.findByStatutId(statutId);
+    }
 }

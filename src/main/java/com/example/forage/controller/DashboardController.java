@@ -1,13 +1,16 @@
 package com.example.forage.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.forage.model.DemandeStatut;
 import com.example.forage.model.Statut;
 import com.example.forage.service.ClientService;
 import com.example.forage.service.DemandeService;
@@ -55,5 +58,20 @@ public class DashboardController {
         }
         return "forage/devis_total/list";
     }
+    @GetMapping( {"/statut","/statut/{statutId}"})
+    public String dashboardStatut(@PathVariable(value = "statutId", required = false) Long statutId, Model model) {
+        // List<Statut> statuts = statutService.getAll();
+        List<DemandeStatut> demandesStatut = new ArrayList<>();
+        // model.addAttribute("statuts", statuts);
+        if (statutId != null) {
+            demandesStatut = demandeStatutService.findByStatutId(statutId);
+        }else {
+            demandesStatut = demandeStatutService.getFilteredStatuts(null, null, null);
+        }
+        model.addAttribute("demandesStatut", demandesStatut);
+
+        return "forage/devis_total/statutlist";
+    }
+
 
 }

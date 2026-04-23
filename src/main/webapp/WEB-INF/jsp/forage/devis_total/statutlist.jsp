@@ -5,28 +5,19 @@
 
 
         <main class="container">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2.5rem;">
-                <div>
-                    <h1 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">Historique des
-                        Statuts</h1>
-                    <p style="color: #64748b;">Projet #<strong>${demande.id}</strong> | Client:
-                        <strong>${demande.client.nom}</strong></p>
-                </div>
-                <a href="${pageContext.request.contextPath}/forage/demande/statut/form/${demande.id}"
-                    class="btn-premium">
-                    <span style="font-size: 1.2rem; margin-right: 0.5rem;">+</span> Ajouter un Statut
-                </a>
+            <div style="margin-bottom: 2rem;">
+                <h1 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">Historique des Statuts</h1>
             </div>
             <div class="premium-card">
                 <div class="card-header" style="background: #f8fafc;">
-                    <h3 style="margin:0; font-size: 1.1rem; color: var(--primary-dark);">Chronologie du projet</h3>
-                    <span class="drilling-badge">${history.size()} événements</span>
+                    <h3 style="margin:0; font-size: 1.1rem; color: var(--primary-dark);">Chronologie des projet</h3>
+                    <span class="drilling-badge">${demandesStatut.size()} événements</span>
                 </div>
                 <div class="card-body" style="background: #fafafa; padding: 2.5rem;">
                     <c:choose>
-                        <c:when test="${not empty history}">
+                        <c:when test="${not empty demandesStatut}">
                             <div class="status-timeline">
-                                <c:forEach var="ds" items="${history}">
+                                <c:forEach var="ds" items="${demandesStatut}">
                                     <div class="timeline-item">
                                         <div class="timeline-content" style="width: 100%;">
                                             <form action="${pageContext.request.contextPath}/forage/demande/statut/edit"
@@ -38,18 +29,21 @@
                                                 <div
                                                     style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
                                                     <div>
+                                                        <h4 style="margin: 0; color: var(--primary-dark); font-size: 1rem;">Projet #<strong>${ds.demande.id}</strong></h4>
+                                                        <p style="margin: 0.2rem 0 0.5rem 0; color: #64748b; font-size: 0.85rem;">Client: <strong>${ds.demande.client.nom}</strong></p>
                                                         <span class="timeline-status"
                                                             style="display: inline-block; background: var(--primary-light); color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
                                                             ${ds.statut.nom}
                                                         </span>
                                                     </div>
-                                                    <button type="submit" class="btn-premium"
-                                                        style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
-                                                        Modifier
-                                                    </button>
+                                                    <a href="${pageContext.request.contextPath}/forage/demande/statut/form/${ds.demande.id}"
+                                                        style="text-decoration: none; color: var(--primary-color); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
+                                                        <span style="font-size: 1.1rem;">+</span> Statut
+                                                    </a>
                                                 </div>
 
-                                                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
+                                                <div
+                                                    style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
                                                     <div>
                                                         <label
                                                             style="display: block; font-size: 0.75rem; color: #64748b; margin-bottom: 0.4rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.025em;">Date
