@@ -15,4 +15,6 @@ public interface DemandeStatutDAO extends JpaRepository<DemandeStatut, Long> {
     @Query("SELECT COUNT(*) FROM DemandeStatut ds WHERE ds.statut.id = :statutId")
     Long countByStatutId(Long statutId);
 
+    List<DemandeStatut> findByStatutId(Long statutId);
+
 }

@@ -87,7 +87,6 @@ public class DevisController {
                 details.add(detail);
             }
         }
-        demandeService.sortStatutByDate(demande);
         devis.setDetailDevis(details);
         Statut goodStatut = statutService.getBonStatut(typeDevis,0);
         devisService.saveDevis(devis);
@@ -125,7 +124,6 @@ public class DevisController {
     @GetMapping("/valider/{demandeId}/{devisId}")
     public String validerDevis(@PathVariable("demandeId") Long demandeId, @PathVariable("devisId") Long devisId, Model model) {
         Demande demande = demandeService.getDemandeById(demandeId);
-        demandeService.sortStatutByDate(demande);
         Devis devis = devisService.getDevisById(devisId);
         TypeDevis typeDevis = devis.getTypeDevis();
         Statut goodStatut = statutService.getBonStatut(typeDevis,1);
@@ -145,7 +143,6 @@ public class DevisController {
     @GetMapping("/refuser/{demandeId}/{devisId}")
     public String refuserDevis(@PathVariable("demandeId") Long demandeId, @PathVariable("devisId") Long devisId, Model model) {
         Demande demande = demandeService.getDemandeById(demandeId);
-        demandeService.sortStatutByDate(demande);
         Devis devis = devisService.getDevisById(devisId);
         TypeDevis typeDevis = devis.getTypeDevis();
         Statut goodStatut = statutService.getBonStatut(typeDevis,2);

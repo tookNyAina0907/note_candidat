@@ -6,6 +6,7 @@
 
 <main class="container">
         <div class="stats-grid">
+            <!-- <h2>Liste des Clients</h2> -->
             <a href="${pageContext.request.contextPath}/forage/chiffre-affaire" class="stat-card stat-card--blue">
                 <div class="stat-accent accent--blue"></div>
                 <span class="stat-label">Chiffre d'affaire</span>
@@ -37,8 +38,9 @@
             </a>
         </div>
         <div class="stats-grid">
+            <!-- <h2>Liste des Clients</h2> -->
             <c:forEach var="statut" items="${statuts}">
-                <a href="${pageContext.request.contextPath}/forage/demande/statut/${statut.id}" class="stat-card stat-card--gray">
+                <a href="${pageContext.request.contextPath}/forage/demande/dstatut/${statut.id}" class="stat-card stat-card--gray">
                     <div class="stat-accent accent--gray"></div>
                     <span class="stat-label"> nombre de ${statut.nom}</span>
                     <span class="stat-value">${requestScope[statut.nom]}</span>

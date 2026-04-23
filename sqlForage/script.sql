@@ -54,6 +54,13 @@ CREATE TABLE t_demande_statut(
     FOREIGN KEY (statut_id) REFERENCES t_statut(id)
 );
 ALTER TABLE t_demande_statut ADD COLUMN observation VARCHAR(250);
+ALTER TABLE t_demande_statut ADD COLUMN duree TIME;
+
+CREATE TABLE t_heure_travail(
+    id SERIAL PRIMARY KEY,
+    debut TIME,
+    fin TIME
+);
 
 CREATE TABLE t_parametre(
     id SERIAL PRIMARY KEY,

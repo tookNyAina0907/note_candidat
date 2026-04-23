@@ -29,6 +29,7 @@ public class Demande {
     private List<Devis> devis;
 
     @OneToMany(mappedBy = "demande", fetch = FetchType.EAGER , cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("dateStatut DESC")
     private List<DemandeStatut> demandeStatuts;
 
     @Column(name = "lieu", nullable = false)
@@ -54,7 +55,6 @@ public class Demande {
         this.lieu = lieu;
         this.devis = devis;
         this.demandeStatuts = demandeStatuts;
-        this.devis = devis;
     }
 
     public Long getId() {

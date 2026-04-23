@@ -2,9 +2,12 @@ package com.example.forage.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +38,21 @@ public class DemandeController {
     @Autowired 
     private ParametreDAO_forage parametreDAO;
 
-    @GetMapping
-    public String getAllDemandes(Model model) {
-        List<Demande> demandes = demandeService.getAllDemandes();
-        demandeService.sortAllStatutByDate(demandes);
-        model.addAttribute("demandes", demandes);
-        return "forage/demande/list";
+    @GetMapping({"","/dclient/{clientId}","/dstatut/{statutId}"})
+    public String getAllDemandes(@PathVariable(value = "clientId",required = false) Optional<Long> clientId,@PathVariable(value = "statutId",required = false) Optional<Long> statutId,Model model) {
+        if (clientId.isPresent()) {
+            List<Demande> demandes = demandeService.getDemandesByClientId(clientId.get());
+            model.addAttribute("demandes", demandes);
+            return "forage/demande/list";
+        } else if (statutId.isPresent()) {
+            List<Demande> demandes = demandeService.getDemandesByCurrentStatutId(statutId.get());
+            model.addAttribute("demandes", demandes);
+            return "forage/demande/list";
+        } else {
+            List<Demande> demandes = demandeService.getAllDemandes();
+            model.addAttribute("demandes", demandes);
+            return "forage/demande/list";
+        }
     }
 
     @GetMapping("/form")
@@ -95,8 +107,6 @@ public class DemandeController {
             response.put("district", demande.getDistrict());
             response.put("lieu", demande.getLieu());
             response.put("parametre", parametre.getNom());
-            
-            demandeService.sortStatutByDate(demande);
             if (demande.getDemandeStatuts() != null && !demande.getDemandeStatuts().isEmpty()) {
                 response.put("statut", demande.getDemandeStatuts().get(0).getStatut().getNom());
             } else {
@@ -126,8 +136,6 @@ public class DemandeController {
                     
                 }
             }
-            
-            demandeService.sortStatutByDate(demande);
             model.addAttribute("demande", demande);
             model.addAttribute("history", filteredStatuts != null ? filteredStatuts : demande.getDemandeStatuts());
             model.addAttribute("startDate", startDateStr);
