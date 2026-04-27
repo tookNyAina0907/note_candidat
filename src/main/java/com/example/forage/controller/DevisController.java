@@ -1,5 +1,6 @@
 package com.example.forage.controller;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,7 @@ public class DevisController {
                 details.add(detail);
             }
         }
+        
         devis.setDetailDevis(details);
         Statut goodStatut = statutService.getBonStatut(typeDevis,0);
         devisService.saveDevis(devis);
@@ -164,5 +166,15 @@ public class DevisController {
     //     Double chiffreAffaire = devisService.totalt();
     //     model.addAttribute("chiffre", chiffreAffaire);
     //     return "forage/devis_total/list";
+    // }
+    // private void MiseAjourDuree(Demande demande, List<DemandeStatut> filteredStatuts) {
+    //     if (filteredStatuts != null && filteredStatuts.size() >= 2) {
+    //         for (int i = 0; i < filteredStatuts.size() - 1; i++) {
+    //             DemandeStatut ds1 = filteredStatuts.get(i);
+    //             DemandeStatut ds2 = filteredStatuts.get(i + 1);
+    //             Duration d = demandeStatutService.getDurationEntreDemandeStatut_(ds1.getDateStatut(), ds2.getDateStatut());
+    //             demandeStatutService.upadateDemandeStatutDuration(ds1.getId(), d);
+    //         }
+    //      }
     // }
 }

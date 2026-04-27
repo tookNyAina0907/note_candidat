@@ -22,6 +22,9 @@ public class HeureTravail {
     @Column(name = "fin", nullable = false)
     private LocalTime fin;
 
+    public HeureTravail() {
+    }
+
     public Long getId() {
         return id;
     }

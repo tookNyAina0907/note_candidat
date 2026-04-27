@@ -1,5 +1,6 @@
 package com.example.forage.model;
 
+// import java.time.Long;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -32,48 +33,87 @@ public class DemandeStatut {
     @Column(name = "observation")
     private String observation;
 
-    public DemandeStatut(Long id, Demande demande, Statut statut, LocalDateTime dateStatut, String observation) {
+    @Column(name = "duree")
+    private Long duree;
+
+    public Long getDuree() {
+        return duree;
+    }
+
+    public void setDuree(Long duree) {
+        this.duree = duree;
+    }
+    @Column(name = "duree_methode")
+    private Long dureeMethode;
+
+    public Long getDureeMethode() {
+        return dureeMethode;
+    }
+
+    public void setDureeMethode(Long dureeMethode) {
+        this.dureeMethode = dureeMethode;
+    }
+
+    // public void setDuree(Long duree) {
+    //     this.duree = duree;
+    // }
+
+    public DemandeStatut(Long id, Demande demande, Statut statut, LocalDateTime dateStatut, String observation,
+            Long duree) {
         this.id = id;
         this.demande = demande;
         this.statut = statut;
         this.dateStatut = dateStatut;
         this.observation = observation;
+        this.duree = duree;
     }
+
     public String getObservation() {
         return observation;
     }
+
     public void setObservation(String observation) {
         this.observation = observation;
     }
+
     public DemandeStatut() {
     }
+
     public DemandeStatut(Long id, Demande demande, Statut statut, LocalDateTime dateStatut) {
         this.id = id;
         this.demande = demande;
         this.statut = statut;
         this.dateStatut = dateStatut;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public Demande getDemande() {
         return demande;
     }
+
     public void setDemande(Demande demande) {
         this.demande = demande;
     }
+
     public Statut getStatut() {
         return statut;
     }
+
     public void setStatut(Statut statut) {
         this.statut = statut;
     }
+
     public LocalDateTime getDateStatut() {
         return dateStatut;
     }
+
     public void setDateStatut(LocalDateTime dateStatut) {
         this.dateStatut = dateStatut;
     }

@@ -54,7 +54,7 @@ CREATE TABLE t_demande_statut(
     FOREIGN KEY (statut_id) REFERENCES t_statut(id)
 );
 ALTER TABLE t_demande_statut ADD COLUMN observation VARCHAR(250);
-ALTER TABLE t_demande_statut ADD COLUMN duree TIME;
+ALTER TABLE t_demande_statut ADD COLUMN duree_methode BigInt;
 
 CREATE TABLE t_heure_travail(
     id SERIAL PRIMARY KEY,

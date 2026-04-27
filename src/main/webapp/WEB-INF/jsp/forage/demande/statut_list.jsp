@@ -42,6 +42,20 @@
                                                             style="display: inline-block; background: var(--primary-light); color: var(--primary-color); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
                                                             ${ds.statut.nom}
                                                         </span>
+
+                                                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                                                        <span class="timeline-status" 
+                                                              style="display: inline-flex; align-items: center; background: #f1f5f9; color: #475569; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid #e2e8f0;">
+                                                            <span style="opacity: 0.7; margin-right: 0.4rem;">methode 2:</span> 
+                                                            <strong>${ds.duree} h</strong>
+                                                        </span>
+
+                                                        <span class="timeline-status" 
+                                                              style="display: inline-flex; align-items: center; background: #f1f5f9; color: #475569; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid #e2e8f0;">
+                                                            <span style="opacity: 0.7; margin-right: 0.4rem;">method 1 :</span> 
+                                                            <strong>${ds.dureeMethode} h</strong>
+                                                        </span>
+                                                    </div>
                                                     </div>
                                                     <button type="submit" class="btn-premium"
                                                         style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
